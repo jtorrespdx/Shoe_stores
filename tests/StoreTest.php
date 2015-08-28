@@ -118,11 +118,23 @@
 
         }
 
-        // function testUpdate()
-        // {
-        //
-        // }
-        //
+        function testUpdate()
+        {
+            //Arrange
+            $store_location = "Lloyd Center";
+            $test_store = new Store($store_location);
+            $test_store->save();
+
+            $new_store_location = "Hawthorn";
+
+            //Act
+            $test_store->update($new_store_location);
+
+            //Assert
+            $this->assertEquals("Hawthorn", $test_store->getStoreLocation());
+
+        }
+
         // function TestDeleteStore()
         // {
         //

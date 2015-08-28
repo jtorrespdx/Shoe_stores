@@ -32,6 +32,18 @@
                 $this->id = $GLOBALS['DB']->lastInsertId();
             }
 
+            function update($new_store_location)
+            {
+                $GLOBALS['DB']->exec("UPDATE stores SET location = '{$new_store_location}' WHERE id = {$this->getId()};");
+                $this->setStoreLocation($new_store_location);
+            }
+
+
+
+
+
+
+
             static function getAll()
             {
                 $returned_stores = $GLOBALS['DB']->query("SELECT * FROM stores;");
