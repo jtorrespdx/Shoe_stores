@@ -38,6 +38,11 @@
                 $this->setStoreLocation($new_store_location);
             }
 
+            function deleteStore()
+            {
+                $GLOBALS['DB']->exec("DELETE FROM stores WHERE id = {$this->getId()};");
+            }
+
 
 
 

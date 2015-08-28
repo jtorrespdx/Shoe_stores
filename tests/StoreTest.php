@@ -135,11 +135,26 @@
 
         }
 
-        // function TestDeleteStore()
-        // {
-        //
-        // }
-        //
+        function testDeleteStore()
+        {
+            //Arrange
+            $store_location = "Lloyd Center";
+            $id = 1;
+            $test_store = new Store($store_location, $id);
+            $test_store->save();
+
+            $store_location2 = "Pioneer Place";
+            $id2 = 2;
+            $test_store2 = new Store($store_location2, $id2);
+            $test_store2->save();
+
+            //Act
+            $test_store->deleteStore();
+
+            //Assert
+            $this->assertEquals([$test_store2], Store::getAll());
+        }
+
         // function testDelete()
         // {
         //
