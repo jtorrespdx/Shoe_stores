@@ -13,11 +13,11 @@
     $DB = new PDO($server, $username, $password);
     class BrandTest extends PHPUnit_Framework_TestCase
     {
-        // protected function tearDown()
-        // {
-        //     Brand::deleteAll();
-        //     Store::deleteAll();
-        // }
+        protected function tearDown()
+        {
+            // Brand::deleteAll();
+            Store::deleteAll();
+        }
 
         function testGetBrandName()
         {
@@ -63,16 +63,16 @@
         function testSave()
         {
             //Arrange
-            $store_location = "Lloyd Center";
+            $brand_name = "Nike";
             $id = 1;
-            $test_store = new Store($store_location, $id);
+            $test_brand = new Brand($brand_name, $id);
 
             //Act
-            $test_store->save();
+            $test_brand->save();
 
             //Assert
-            $result = Store::getAll();
-            $this->assertequals($test_store, $result[0]);
+            $result = Brand::getAll();
+            $this->assertequals($test_brand, $result[0]);
         }
 
         function testGetAll()
@@ -94,30 +94,30 @@
             //Assert
             $this->assertEquals([$test_brand, $test_brand2], $result);
         }
-        //
-        // function testGetStore()
-        // {
-        //     //Arrange
-        //     $store_location = "Lloyd Center";
-        //     $test_store = new Store($store_location);
-        //     $test_store->save();
-        //
-        //     $brand_name = "Nike";
-        //     $test_brand = new Brand($brand_name);
-        //     $test_brand->save();
-        //
-        //     $brand_name2 = "Reebok";
-        //     $test_brand2 = new Brand(brand_name2);
-        //     $test_brand2->save();
-        //
-        //     //Act
-        //     $test_store->addBrand($test_brand);
-        //     $test_store->addBrand($test_brand2);
-        //
-        //     $result = $test_store->getBrand();
-        //
-        //     //Assert
-        //     $this->assertEquals([$test_brand, $test_brand2], $result);
-        // }
+
+        function testGetStore()
+        {
+            //Arrange
+            $brand_name = "Nike";
+            $test_brand = new Brand($brand_name);
+            $test_brand->save();
+
+            $store_location = "Lloyd Center";
+            $test_store = new Store($store_location);
+            $test_store->save();
+
+            $store_location2 = "Pioneer Place";
+            $test_store2 = new Store($store_location2, $id2);
+            $test_store2->save();
+
+            //Act
+            $test_brand->addStore($test_store);
+            $test_brand->addStore($test_store2);
+
+            $result = $test_brand->getStore();
+
+            //Assert
+            $this->assertEquals([$test_store, $test_store2], $result);
+        }
     }
  ?>
