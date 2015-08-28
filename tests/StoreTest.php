@@ -54,7 +54,7 @@
             //Arrange
             $store_location = "Lloyd Center";
             $id = 1;
-            $test_store = new Store($store_location, $id)
+            $test_store = new Store($store_location, $id);
 
             //Act
             $result = $test_store->getId();

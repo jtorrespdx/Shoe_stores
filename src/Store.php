@@ -21,10 +21,10 @@
             }
 
 
-            // function getId()
-            // {
-            //     return $this->id;
-            // }
+            function getId()
+            {
+                return $this->id;
+            }
             //
             // function save
 
