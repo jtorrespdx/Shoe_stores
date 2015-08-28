@@ -15,11 +15,11 @@
     class StoreTest extends PHPUnit_Framework_TestCase
     {
 
-        // protected function teardown()
-        // {
-        //     Store::deleteAll();
-        //     Brand::deleteAll();
-        // }
+        protected function teardown()
+        {
+            Store::deleteAll();
+            // Brand::deleteAll();
+        }
 
         function testGetStoreLocation()
         {
@@ -62,12 +62,62 @@
             //Assert
             $this->assertEquals(1, $result);
         }
-        //
-        // function testSave()
-        // {
-        //
-        // }
-        //
+
+        function testGetAll()
+        {
+            //Arrange
+            $store_location = "Lloyd Center";
+            $id = 1;
+            $test_store = new Store($store_location, $id);
+            $test_store->save();
+
+            $store_location2 = "Pioneer Place";
+            $id2 = 2;
+            $test_store2 = new Store($store_location2, $id2);
+            $test_store2->save();
+
+            //Act
+            $result = Store::getAll();
+
+            //Assert
+            $this->assertEquals([$test_store, $test_store2], $result);
+        }
+
+        function testDeleteAll()
+        {
+            //Arrange
+            $store_location = "Lloyd Center";
+            $id = 1;
+            $test_store = new Store($store_location, $id);
+
+            $store_location2 = "Pioneer Place";
+            $id2 = 2;
+            $test_store2 = new Store($store_location2, $id2);
+
+            //Act
+            Store::deleteAll();
+
+            //Assert
+            $result = Store::getALl();
+            $this->assertEquals([], $result);
+        }
+
+        function testSave()
+        {
+            //Arrange
+            $store_location = "Lloyd Center";
+            $id = 1;
+            $test_store = new Store($store_location, $id);
+
+            //Act
+            $test_store->save();
+
+            //Assert
+            $result = Store::getAll();
+            $this->assertequals($test_store, $result[0]);
+
+        }
+
         // function testUpdate()
         // {
         //
@@ -78,12 +128,7 @@
         //
         // }
         //
-        // function testGetAll()
-        // {
-        //
-        // }
-        //
-        // function testDeleteAll()
+        // function testDelete()
         // {
         //
         // }
@@ -102,10 +147,6 @@
         // {
         //
         // }
-        //
-        // function testDelete()
-        // {
-        //
-        // }
+
     }
  ?>
