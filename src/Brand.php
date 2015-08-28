@@ -26,6 +26,11 @@
             return $this->id;
         }
 
+        function save()
+        {
+            $GLOBALS['DB']->exec("INSERT INTO brands (brand_name) VALUES ('{$this->getBrandName()}');");
+            $this->id = $GLOBALS['DB']->lastInsertId();
+        }
 
 
 
