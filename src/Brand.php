@@ -32,29 +32,40 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
-        function getStore()
-        {
-            $returned_stores = $GLOBALS['DB']->query("SELECT stores.* FROM brands
-            JOIN brands_stores ON (brands.id = brands_stores.brand_id)
-            JOIN stores ON (brands_stores.store_id = stores.id)
-            WHERE brands.id = {$this->getId()};");
+        // function getStore()
+        // {
+        //     $returned_stores = $GLOBALS['DB']->query("SELECT stores.* FROM brands
+        //     JOIN brands_stores ON (brands.id = brands_stores.brand_id)
+        //     JOIN stores ON (brands_stores.store_id = stores.id)
+        //     WHERE brands.id = {$this->getId()};");
+        //
+        //     $stores = array();
+        //     foreach ($returned_stores as $store) {
+        //         $store_location = $store['location'];
+        //         $id = $store['id'];
+        //         $new_store = new Store($store_location, $id);
+        //         array_push($stores, $new_store);
+        //     }
+        //     return $stores;
+        // }
+        //
+        // function addStore($new_store)
+        // {
+        //     $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id) VALUES ({$this->getId()}, {$new_store->getId()});");
+        // }
 
-            $stores = array();
-            foreach ($returned_stores as $store) {
-                $store_location = $store['location'];
-                $id = $store['id'];
-                $new_store = new Store($store_location, $id);
-                array_push($stores, $new_store);
+
+        static function find($search_id)
+        {
+            $found_brand = null;
+            $all_brands = Brand::getAll();
+            foreach($all_brands as $brand) {
+                if ($brand->getId() == $search_id) {
+                    $found_brand = $brand;
+                }
             }
-            return $stores;
+            return $found_brand;
         }
-
-        function addStore($store)
-        {
-            $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id) VALUES ({$this->getId()}, {$store->getId()});");
-        }
-
-
 
         static function getAll()
         {
@@ -72,6 +83,7 @@
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM brands;");
+            $GLOBALS['DB']->exec("DELETE FROM brands_stores;");
         }
 
 

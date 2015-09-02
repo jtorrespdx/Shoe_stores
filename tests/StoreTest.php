@@ -155,10 +155,24 @@
             $this->assertEquals([$test_store2], Store::getAll());
         }
 
-        // function testFind()
-        // {
-        //
-        // }
+        function testFind()
+        {
+            //Arrange
+            $store_location = "Lloyd Center";
+            $test_store = new Store($store_location, $id);
+            $test_store->save();
+
+            $store_location2 = "Pioneer Place";
+            $test_store2 = new Store($store_location2, $id2);
+            $test_store2->save();
+
+            //Act
+            $result = Store::find($test_store2->getId());
+
+            //assert
+            $this->assertEquals($test_store2, $result);
+
+        }
         //
         // function testAddBrand()
         // {
@@ -177,7 +191,7 @@
         //     //Assert
         //     $this->assertEquals($test_store->getBrands(), [$test_brand]);
         // }
-
+        //
         // function testGetBrands()
         // {
         //     //Arrange
