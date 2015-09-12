@@ -152,7 +152,7 @@
             $this->assertEquals([$test_brand2], Brand::getAll());
         }
 
-        function testUpdate();
+        function testUpdate()
         {
             //Arrange
             $brand_name = "Nike";
