@@ -172,48 +172,51 @@
 
 
 
-        // function testGetStores()
-        // {
-        //     //Arrange
-        //     $brand_name = "Nike";
-        //     $test_brand = new Brand($brand_name);
-        //     $test_brand->save();
-        //
-        //     $store_location = "Lloyd Center";
-        //     $test_store = new Store($store_location);
-        //     $test_store->save();
-        //
-        //     $store_location2 = "Pioneer Place";
-        //     $test_store2 = new Store($store_location2);
-        //     $test_store2->save();
-        //
-        //     //Act
-        //     $test_brand->addStore($test_store);
-        //     $test_brand->addStore($test_store2);
-        //
-        //     //Assert
-        //     $this->assertEquals($test_brand->getStores(), [$test_store, $test_store2]);
-        // }
-        //
-        // function testAddStore()
-        // {
-        //     //Assert
-        //     $brand_name = "Nike";
-        //     $id = 1;
-        //     $test_brand = new Brand($brand_name, $id);
-        //     $test_brand->save();
-        //
-        //     $store_location = "Lloyd Center";
-        //     $id = 2;
-        //     $test_store = new Store($store_location, $id2);
-        //     $test_store->save();
-        //
-        //     //Act
-        //     $test_brand->addStore($test_store);
-        //
-        //     //Assert
-        //     $this->assertEquals($test_brand->getStores(), [$test_store]);
-        // }
-        //
+        function testGetStores()
+        {
+            //Arrange
+            $brand_name = "Nike";
+            $id = 1;
+            $test_brand = new Brand($brand_name, $id);
+            $test_brand->save();
+
+            $store_location = "Lloyd Center";
+            $id2 = 2;
+            $test_store = new Store($store_location, $id2);
+            $test_store->save();
+
+            $store_location2 = "Pioneer Place";
+            $id3 = 3;
+            $test_store2 = new Store($store_location2, $id3);
+            $test_store2->save();
+
+            //Act
+            $test_brand->addStore($test_store);
+            $test_brand->addStore($test_store2);
+            $result = $test_brand->getStores();
+
+            //Assert
+            $this->assertEquals([$test_store, $test_store2], $result);
+        }
+
+        function testAddStore()
+        {
+            //Assert
+            $brand_name = "Nike";
+            $test_brand = new Brand($brand_name);
+            $test_brand->save();
+
+            $store_location = "Lloyd Center";
+            $test_store = new Store($store_location);
+            $test_store->save();
+
+            //Act
+            $test_brand->addStore($test_store);
+            $result = $test_brand->getStores();
+
+            //Assert
+            $this->assertEquals([$test_store], $result);
+        }
+
     }
  ?>
